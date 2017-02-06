@@ -36,7 +36,7 @@
             android:id="@+id/editText2" />
     </LinearLayout>
     <Button
-        android:text="mybutton"
+        android:text="aaa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
