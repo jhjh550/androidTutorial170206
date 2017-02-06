@@ -49,4 +49,16 @@
         android:text="myButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <EditText
+        android:inputType="textEmailAddress"
+        android:hint="input here"
+        android:id="@+id/myEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ToggleButton
+        android:text="ttttt"
+        android:textOff="abc"
+        android:textOn="qwer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
