@@ -26,8 +26,22 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "onstart", Toast.LENGTH_SHORT).show();
     }
 
+    private static final int req_code = 100;
     public void onBtnClicked(View v){
         Intent intent = new Intent(this, MyActivity.class);
-        startActivity(intent);
+        intent.putExtra("id", "abcde");
+        intent.putExtra("pw", "12345");
+        startActivityForResult(intent, req_code);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == req_code){
+            if(resultCode == RESULT_OK){
+                String str = data.getStringExtra("myResult");
+                Toast.makeText(this, "result : "+str, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
