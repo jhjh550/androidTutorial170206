@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView weatherTextView;
@@ -18,7 +23,36 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            return null;
+            String res = "";
+            try {
+                XmlPullParser xpp = XmlPullParserFactory.newInstance().newPullParser();
+                URL url = new URL(params[0]);
+                xpp.setInput(url.openStream(), "utf-8");
+                int eventType = xpp.getEventType();
+                boolean bRead = false;
+                while(eventType != XmlPullParser.END_DOCUMENT){
+                    switch (eventType){
+                        case XmlPullParser.START_TAG:
+                            if(xpp.getName().equals("wfKor")){
+                                bRead = true;
+                            }
+                            break;
+                        case XmlPullParser.TEXT:
+                            if(bRead) {
+                                res += "날씨 : "+xpp.getText()+"\n";
+                                bRead = false;
+                            }
+                            break;
+                        case XmlPullParser.END_TAG:
+                            break;
+                    }
+                    eventType = xpp.next();
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return res;
         }
     }
     @Override
@@ -28,22 +62,5 @@ public class MainActivity extends AppCompatActivity {
         weatherTextView = (TextView) findViewById(R.id.weatherTextView);
         MyPullParserTask task = new MyPullParserTask();
         task.execute("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1153052000");
-
-
-
-
-
-//        try {
-//            URL url = new URL();
-//            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-//            XmlPullParser xpp = factory.newPullParser();
-//            xpp.setInput(url.openStream(), "UTF-8");
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 }
