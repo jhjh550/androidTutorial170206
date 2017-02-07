@@ -9,8 +9,20 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    class WeatherData{
+        int day;
+        int hour;
+        float temp;
+        String wfKor;
+    }
+
+    ArrayList<WeatherData> list = new ArrayList<>();
+    enum DataType {none, hourType, dayType, tempType, wfKorType}
+    DataType type = DataType.none;
 
     TextView weatherTextView;
     class MyPullParserTask extends AsyncTask<String, Void, String>{
@@ -21,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             weatherTextView.setText(s);
         }
 
+
         @Override
         protected String doInBackground(String... params) {
             String res = "";
@@ -29,19 +42,28 @@ public class MainActivity extends AppCompatActivity {
                 URL url = new URL(params[0]);
                 xpp.setInput(url.openStream(), "utf-8");
                 int eventType = xpp.getEventType();
-                boolean bRead = false;
+
                 while(eventType != XmlPullParser.END_DOCUMENT){
                     switch (eventType){
                         case XmlPullParser.START_TAG:
-                            if(xpp.getName().equals("wfKor")){
-                                bRead = true;
+                            if(xpp.getName().equals("hour")){
+                                type = DataType.hourType;
+                            }else if(xpp.getName().equals("wfKor")){
+
                             }
                             break;
                         case XmlPullParser.TEXT:
-                            if(bRead) {
-                                res += "날씨 : "+xpp.getText()+"\n";
-                                bRead = false;
+                            switch (type){
+                                case hourType:
+                                    break;
+                                case dayType:
+                                    break;
+                                case tempType:
+                                    break;
+                                case wfKorType:
+                                    break;
                             }
+                            type = DataType.none;
                             break;
                         case XmlPullParser.END_TAG:
                             break;
