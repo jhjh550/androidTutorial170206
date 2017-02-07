@@ -11,6 +11,8 @@
     tools:context="com.example.a.a08_asynctask.MainActivity">
 
     <TextView
+        android:textSize="30dp"
+        android:id="@+id/myTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
