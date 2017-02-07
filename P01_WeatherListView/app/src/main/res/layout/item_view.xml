@@ -10,7 +10,6 @@
         android:src="@drawable/sunny"
         android:layout_width="72dp"
         android:layout_height="72dp" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_margin="12dp"
