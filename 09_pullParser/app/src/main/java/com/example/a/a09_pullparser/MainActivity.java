@@ -33,12 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
     TextView weatherTextView;
     class MyPullParserTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             String res = "";
             for(WeatherData data : list){
-                res += data.toString();
+                res += data.toString()+"\n";
             }
             weatherTextView.setText(res);
         }
@@ -104,5 +110,7 @@ public class MainActivity extends AppCompatActivity {
         weatherTextView = (TextView) findViewById(R.id.weatherTextView);
         MyPullParserTask task = new MyPullParserTask();
         task.execute("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1153052000");
+
+        task.cancel(true);
     }
 }
