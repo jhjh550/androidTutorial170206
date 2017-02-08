@@ -45,11 +45,12 @@ public class TestSQLiteHandler {
         SQLiteDatabase db = helper.getReadableDatabase();
         String res = "";
 
+//        Cursor d1 = db.rawQuery("select * from student", null);
         Cursor c = db.query("student",null, null, null, null, null, null);
         while(c.moveToNext()){
             String name     = c.getString( c.getColumnIndex("name") );
             int age         = c.getInt( c.getColumnIndex("age") );
-            String address  = c.getString( c.getColumnIndex("addresss") );
+            String address  = c.getString( c.getColumnIndex("address") );
 
             res += "name : "+name+" age : "+age+" address : "+address+"\n";
         }
