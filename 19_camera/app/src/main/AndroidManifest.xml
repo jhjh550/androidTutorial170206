@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.a.a18_service2">
+    package="com.example.a.a19_camera">
 
     <application
         android:allowBackup="true"
@@ -15,17 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".MyService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyIntentService"
-            android:exported="false" />
-        <service
-            android:name=".MyIntentService2"
-            android:exported="false"></service>
     </application>
 
 </manifest>
