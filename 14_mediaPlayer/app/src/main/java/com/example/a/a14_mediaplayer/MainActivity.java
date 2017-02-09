@@ -12,10 +12,13 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     SeekBar seekBar;
     MediaPlayer mp = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         seekBar = (SeekBar) findViewById(R.id.playSeekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

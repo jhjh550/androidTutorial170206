@@ -16,11 +16,12 @@
         android:layout_height="wrap_content"
         android:text="play" />
     <Button
+        android:background="@drawable/btn_group_focused_holo_dark"
         android:onClick="onStopClick"
         android:layout_alignParentRight="true"
-        android:text="stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="stop1231231231321312321321321321321321321321321321312321321321321321321321321321321321321321321321321321312321"
+        android:layout_width="240dp"
+        android:layout_height="100dp" />
     <SeekBar
         android:progress="30"
         android:id="@+id/playSeekBar"
