@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:text="Hello World!" />
     <ImageView
+        android:src="@mipmap/ic_launcher"
         android:id="@+id/photoView"
         android:layout_below="@id/btnPhoto"
         android:layout_width="match_parent"
