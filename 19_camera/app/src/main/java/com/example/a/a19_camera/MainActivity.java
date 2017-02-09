@@ -1,15 +1,12 @@
 package com.example.a.a19_camera;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
-import java.io.File;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,19 +17,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBtnClick(View v){
-        String dirPath = Environment.getExternalStorageDirectory()+"/19Test";
-        File dir = new File(dirPath);
-        if(dir.exists() == false)
-            dir.mkdirs();
-        String filePath = dirPath+"/myImage.jpg";
-        Uri uri = Uri.fromFile(new File(filePath));
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 100);
+    }
 
-        if(Build.VERSION.SDK_INT < 24) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            startActivityForResult(intent, 1);
-        }else{
-            //
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            ImageView imgView = (ImageView) findViewById(R.id.photoView);
+            imgView.setImageBitmap(bitmap);
         }
     }
 }
