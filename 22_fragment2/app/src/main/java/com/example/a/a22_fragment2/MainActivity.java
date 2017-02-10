@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 if(fragment != null){
                     FragmentTransaction tr = fm.beginTransaction();
                     if(fragment.getTag().equals("counter")){
-                        TextFragment textFragment = new TextFragment();
+                        //TextFragment textFragment = new TextFragment();
+                        BlankFragment3 textFragment = BlankFragment3.newInstance("a","b");
                         tr.replace(R.id.frame, textFragment, "text");
                     }else{
                         BlankFragment blankFragment = new BlankFragment();
