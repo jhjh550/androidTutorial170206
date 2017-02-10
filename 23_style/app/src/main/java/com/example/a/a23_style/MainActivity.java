@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
         selectedTextView = (TextView) findViewById(R.id.selectedTextView);
         workingTextView = (TextView) findViewById(R.id.workingTextView);
 
-        Button zeroButton = (Button) findViewById(R.id.zeroButton);
-        Button oneButton = (Button) findViewById(R.id.oneButton);
-        Button enterButton = (Button) findViewById(R.id.enterButton);
 
         View.OnClickListener numberListener = new View.OnClickListener() {
             @Override
@@ -30,19 +29,29 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     workingTextView.append(text);
                 }
-
             }
         };
-        zeroButton.setOnClickListener(numberListener);
-        oneButton.setOnClickListener(numberListener);
-        enterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String value = workingTextView.getText().toString();
-                selectedTextView.setText(value);
-                workingTextView.setText("0");
+
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.activity_main);
+        int num = 1;
+        for(int i=2; i<tableLayout.getChildCount()-1; i++){
+            TableRow tableRow = (TableRow) tableLayout.getChildAt(i);
+            for(int k=0; k<tableRow.getChildCount(); k++){
+                Button button = (Button) tableRow.getChildAt(k);
+                button.setText(""+num);
+                button.setOnClickListener(numberListener);
+                num += 1;
             }
-        });
+        }
+
+//        enterButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String value = workingTextView.getText().toString();
+//                selectedTextView.setText(value);
+//                workingTextView.setText("0");
+//            }
+//        });
 
     }
 }
