@@ -43,15 +43,30 @@ public class MainActivity extends AppCompatActivity {
                 num += 1;
             }
         }
+        TableRow bottomRow = (TableRow) tableLayout.getChildAt( tableLayout.getChildCount()-1 );
+        Button deleteButton = (Button) bottomRow.getChildAt(0);
+        Button zeroButton = (Button) bottomRow.getChildAt(1);
+        Button enterButton = (Button) bottomRow.getChildAt(2);
 
-//        enterButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String value = workingTextView.getText().toString();
-//                selectedTextView.setText(value);
-//                workingTextView.setText("0");
-//            }
-//        });
+        deleteButton.setText("delete");
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                workingTextView.setText("0");
+            }
+        });
+        zeroButton.setText("0");
+        zeroButton.setOnClickListener(numberListener);
+
+        enterButton.setText("enter");
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = workingTextView.getText().toString();
+                selectedTextView.setText(value);
+                workingTextView.setText("0");
+            }
+        });
 
     }
 }
