@@ -15,11 +15,13 @@ import java.util.ArrayList;
 
 public class WeatherPullParser extends AsyncTask<String, Void, String> {
     ArrayList<WeatherData> weatherList;
+    MainActivity.WeatherAdapter adapter;
     enum DataType {none, hourType, dayType, tempType, wfKorType}
     DataType type = DataType.none;
 
-    public WeatherPullParser(ArrayList<WeatherData> weatherList) {
+    public WeatherPullParser(ArrayList<WeatherData> weatherList, MainActivity.WeatherAdapter adapter) {
         this.weatherList = weatherList;
+        this.adapter = adapter;
     }
 
     @Override
@@ -30,6 +32,7 @@ public class WeatherPullParser extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        adapter.notifyDataSetChanged();
     }
 
 

@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
             WeatherData data = weatherList.get(position);
             String info1 = "날씨 : "+data.weather + ", 온도 : "+ data.temperature;
             Date date = new Date();
-            date.setDate(data.hour);
+            date.setDate(date.getDate() + data.day);
+            date.setHours(data.hour);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  HH시");
             String info2 = sdf.format(date);
             textView1.setText(info1);
@@ -51,39 +52,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     ArrayList<WeatherData> weatherList = new ArrayList<>();
+    WeatherAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initData();
-
         ListView listView = (ListView) findViewById(R.id.myListView);
-        WeatherAdapter adapter = new WeatherAdapter();
+        adapter = new WeatherAdapter();
         listView.setAdapter(adapter);
+
+        initData();
     }
 
     private void initData() {
-        for(int i=0; i<20; i++){
-            WeatherData data = new WeatherData();
-            switch (i%4){
-                case 0:
-                    data.weather = "흐림";
-                    break;
-                case 1:
-                    data.weather = "맑음";
-                    break;
-                case 2:
-                    data.weather = "비";
-                    break;
-                case 3:
-                    data.weather = "눈";
-                    break;
-            }
-            data.temperature = 10.0f;
-            data.day = (i*3)/24;
-            data.hour = (i*3)%24;
-            weatherList.add(data);
-        }
+        weatherList.clear();
+        WeatherPullParser parser = new WeatherPullParser(weatherList, adapter);
+        parser.execute("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1153052000");
+    }
+
+    public void onReloadClick(View v){
+        initData();
     }
 }
