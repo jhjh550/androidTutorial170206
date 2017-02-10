@@ -28,10 +28,35 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btnRemove:
+                if(fragment != null){
+                    FragmentTransaction tr = fm.beginTransaction();
+                    tr.remove(fragment);
+                    tr.commit();
+                }
                 break;
             case R.id.btnReplace:
+                if(fragment != null){
+                    FragmentTransaction tr = fm.beginTransaction();
+                    if(fragment.getTag().equals("counter")){
+                        TextFragment textFragment = new TextFragment();
+                        tr.replace(R.id.frame, textFragment, "text");
+                    }else{
+                        BlankFragment blankFragment = new BlankFragment();
+                        tr.replace(R.id.frame, blankFragment, "counter");
+                    }
+                    tr.commit();
+                }
                 break;
             case R.id.btnHide:
+                if(fragment != null){
+                    FragmentTransaction tr = fm.beginTransaction();
+                    if(fragment.isHidden())
+                        tr.show(fragment);
+                    else
+                        tr.hide(fragment);
+
+                    tr.commit();
+                }
                 break;
         }
     }
